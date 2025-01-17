@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Helps the browser identify support for mobile applications -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Title on the browser tab -->
+    <title>WebGIS</title>
+    <!-- Leaflet CSS Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <!-- Leaflet JavaScript Library -->
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <!-- Style for the fullscreen map display -->
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML Block to display the map -->
+    <div id="map"></div>
+
+    <script>
+      // Initialize the map
+      var map = L.map("map").setView([-7.9, 110.45], 10); // lat, long, zoom
+
+      // Define basemap layers
+      var basemap0 = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      });
+
+      var Esri_WorldImagery = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+        attribution: "Larasati Oktarani &copy; &mdash; 23611073 Satistika Universitas Islam Indonesia",
+      });
+
+      var OpenTopoMap = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+        attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a>',
+      });
+
+      // Add a default basemap to the map
+      Esri_WorldImagery.addTo(map);
+
+      // Control Layer for switching basemaps
+      var baseMaps = {
+        "Open Street Map": basemap0,
+        "Open Topo Map": OpenTopoMap,
+        "Esri World Imagery": Esri_WorldImagery,
+      };
+
+      var overlayMaps = {}; // Empty object for now, can add overlays later
+
+      var layerControl = L.control.layers(baseMaps, overlayMaps, { collapsed: false });
+      layerControl.addTo(map);
+
+      // Custom marker
+      var customIcon1 = L.icon({
+        iconUrl: "http://www.freeiconspng.com/uploads/google-location-icon-16.png",
+        iconSize: [40, 40],
+      });
+
+      var balai1 = L.marker([-6.170171668106947, 106.84219930683415], { icon: customIcon1 });
+      balai1.bindPopup("Senen Sub-District Office");
+      balai1.addTo(map);
+      balai1.openPopup();
+      balai1.bindTooltip("RRGR+XXG, Gg. Buaya, RT.17/RW.4, Senen, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10410");
+
+      var balai2 = L.marker([-6.203407791640233, 106.8446515150623], { icon: customIcon1 }); // you can change the coordinate
+      balai2.bindPopup("Menteng Sub-District Office");
+      balai2.addTo(map);
+      balai2.openPopup();
+      balai2.bindTooltip("Jl. Anyer No.9 9, RT.1/RW.9, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310");
+
+      var balai3 = L.marker([-6.184772510096671, 106.84749966534254], { icon: customIcon1 });
+      balai3.bindPopup("Kramat Sub-District Office");
+      balai3.addTo(map);
+      balai3.openPopup();
+      balai3.bindTooltip("Jl. Kramat Pulo Dalam 2 No.28, RT.1/RW.6, Kramat, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10450");
+
+      var balai4 = L.marker([-6.171481300453886, 106.81679964205006], { icon: customIcon1 });
+      balai4.bindPopup("South Petojo Sub-District Office");
+      balai4.addTo(map);
+      balai4.openPopup();
+      balai4.bindTooltip("Jl. Petojo Melintang No.19 19, RT.19/RW.7, Petojo Sel., Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10160");
+
+      var balai5 = L.marker([-6.167347063992357, 106.84374412670856], { icon: customIcon1 });
+      balai5.bindPopup("Kemayoran Sub-District Office");
+      balai5.addTo(map);
+      balai5.openPopup();
+      balai5.bindTooltip("Jl. Kepu Bar. No.5 9, RT.9/RW.3, Kemayoran, Kec. Kemayoran, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10620");
+
+      var balai6 = L.marker([-6.152916314672887, 106.85844281506228], { icon: customIcon1 });
+      balai6.bindPopup("Kebon Kosong Sub-District Office");
+      balai6.addTo(map);
+      balai6.openPopup();
+      balai6.bindTooltip("No., Jl. Dakota 2 No.42, RT.7/RW.9, Kb. Kosong, Kec. Kemayoran, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10630");
+
+      var balai7 = L.marker([-6.155192118898034, 106.82896085739154], { icon: customIcon1 });
+      balai7.bindPopup("Karang Anyar Sub-District Office Jakarta");
+      balai7.addTo(map);
+      balai7.openPopup();
+      balai7.bindTooltip("RRVH+PHG, Jalan B, RT.8/RW.5, Karang Anyar, Sawah Besar, Central Jakarta City, Jakarta 10740");
+
+      var balai8 = L.marker([-6.168511898566023, 106.84625584205004], { icon: customIcon1 });
+      balai8.bindPopup("Bungur Sub-District Office");
+      balai8.addTo(map);
+      balai8.openPopup();
+      balai8.bindTooltip("Jl. Kp. Kepu Gg. 5 No.277 17, RT.17/RW.1, Bungur, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10460");
+
+      var balai9 = L.marker([-6.152898421054545, 106.83177944205005], { icon: customIcon1 });
+      balai9.bindPopup("Kartini Sub-District Office");
+      balai9.addTo(map);
+      balai9.openPopup();
+      balai9.bindTooltip("Jl. Kartini VIII Dalam No.18 9, RT.16/RW.8, Kartini, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10750");
+
+      var balai10 = L.marker([-6.167520963752368, 106.85760649972079], { icon: customIcon1 });
+      balai10.bindPopup("Harapan Mulia Sub-District Office - Jakarta");
+      balai10.addTo(map);
+      balai10.openPopup();
+      balai10.bindTooltip("Jl. Cemp. Wangi 2 No.12 11, RT.11/RW.9, Harapan Mulya, Kec. Kemayoran, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10640");
+
+      var balai11 = L.marker([-6.173573000950227, 106.87061155739156], { icon: customIcon1 });
+      balai11.bindPopup("East Cempaka Putih Sub-District Office");
+      balai11.addTo(map);
+      balai11.openPopup();
+      balai11.bindTooltip("RVGC+F6W, Jl. Cempaka Putih Tengah XIII, Cemp. Putih Tim., Kec. Cemp. Putih, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10510");
+
+      var balai12 = L.marker([-6.158720392660125, 106.85625534205002], { icon: customIcon1 });
+      balai12.bindPopup("Serdang Sub-District Office");
+      balai12.addTo(map);
+      balai12.openPopup();
+      balai12.bindTooltip("Jl. Bend. Jago No.11 13, RT.13/RW.2, Serdang, Kec. Kemayoran, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10650");
+
+      var balai13 = L.marker([-6.183841340636243, 106.82917408437929], { icon: customIcon1 });
+      balai13.bindPopup("Kebon Sirih Sub District Office");
+      balai13.addTo(map);
+      balai13.openPopup();
+      balai13.bindTooltip("Jln Jaksa No.8, RT.14/RW.2, Kebon Sirih, Menteng, Central Jakarta City, Jakarta 10340");
+
+      var balai14 = L.marker([-6.153009344599819, 106.81913312670854], { icon: customIcon1 });
+      balai14.bindPopup("West Jakarta District Office Maphar");
+      balai14.addTo(map);
+      balai14.openPopup();
+      balai14.bindTooltip("Jl. Kebon Jeruk XVI No.15 2, RT.2/RW.8, Maphar, Kec. Taman Sari, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11160");
+
+      var balai15 = L.marker([-6.1679499590216915, 106.85927543640034], { icon: customIcon1 });
+      balai15.bindPopup("NEW CEMPAKA SUB-DISTRICT OFFICE");
+      balai15.addTo(map);
+      balai15.openPopup();
+      balai15.bindTooltip("RVJ5+3Q8, Jl. Cempaka Baru II, RT.10/RW.6, Cemp. Baru, Kec. Kemayoran, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10640");
+
+      var balai16 = L.marker([-6.181430352574349, 106.85631139888315], { icon: customIcon1 });
+      balai16.bindPopup("New Johar District Office");
+      balai16.addTo(map);
+      balai16.openPopup();
+      balai16.bindTooltip("Jl. Johar Baru Utara I No.1, RT.12/RW.3, Johar Baru, Kec. Johar Baru, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10560");
+
+      var balai17 = L.marker([-6.154768119398911, 106.79906130683416], { icon: customIcon1 });
+      balai17.bindPopup("Kalianyar SUB-DISTRICT OFFICE - JAKARTA");
+      balai17.addTo(map);
+      balai17.openPopup();
+      balai17.bindTooltip("No., Jl. Kalianyar Raya No.16, RT.4/RW.4, Kali Anyar, Kec. Tambora, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11310");
+
+      var balai18 = L.marker([-6.179763913199705, 106.85851140683415], { icon: customIcon1 });
+      balai18.bindPopup("Kampung Rawa Sub-District Office");
+      balai18.addTo(map);
+      balai18.openPopup();
+      balai18.bindTooltip("RV95+QGJ, Jl. Rawa Selatan III, RT.4/RW.5, Kp. Rw., Kec. Johar Baru, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta");
+
+      var balai19 = L.marker([-6.149745616382855, 106.86746259888315], { icon: customIcon1 });
+      balai19.bindPopup("SUNTER JAYA SUB-DISTRICT OFFICE - JAKARTA");
+      balai19.addTo(map);
+      balai19.openPopup();
+      balai19.bindTooltip("Jl. Bentengan VI No.1, RT.6/RW.5, Sunter Jaya, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14360");
+
+      var balai20 = L.marker([-6.162002852799367, 106.88468416820015], { icon: customIcon1 });
+      balai20.bindPopup("West Kelapa Gading Sub-District Office");
+      balai20.addTo(map);
+      balai20.openPopup();
+      balai20.bindTooltip("Jl. Tabah I No.4, RT.8/RW.2, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240");
+
+      var balai21 = L.marker([-6.2343347847244095, 106.83675902956615], { icon: customIcon1 });
+      balai21.bindPopup("Menteng Dalam Sub-District Office");
+      balai21.addTo(map);
+      balai21.openPopup();
+      balai21.bindTooltip("Jl. Rasamala III No.4, RT.3/RW.13, Menteng Dalam, Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12870");
+
+      var balai22 = L.marker([-6.17938264451948, 106.81965343751716], { icon: customIcon1 });
+      balai22.bindPopup("Lurah office Gambir - Jakarta");
+      balai22.addTo(map);
+      balai22.openPopup();
+      balai22.bindTooltip("Jl. Budi Kemuliaan No.12 2, RT.2/RW.3, Gambir, Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10110");
+
+      var balai23 = L.marker([-6.152310645914065, 106.83902572956616], { icon: customIcon1 });
+      balai23.bindPopup("NORTH GUNUNG SAHARI SUB-DISTRICT OFFICE - JAKARTA");
+      balai23.addTo(map);
+      balai23.openPopup();
+      balai23.bindTooltip("Jl. Gunung Sahari 7A No.30, Gn. Sahari Utara, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10720");
+
+      var balai24 = L.marker([-6.150733634693933, 106.82707068410217], { icon: customIcon1 });
+      balai24.bindPopup("SAWAH BESAR DISTRICT OFFICE - JAKARTA");
+      balai24.addTo(map);
+      balai24.openPopup();
+      balai24.bindTooltip("Jl. Karang Anyar No.12, RT.14/RW.9, Karang Anyar, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10740");
+
+      var balai25 = L.marker([-6.207658208396721, 106.82404946024919], { icon: customIcon1 });
+      balai25.bindPopup("KANTOR KELURAHAN SETIA BUDI");
+      balai25.addTo(map);
+      balai25.openPopup();
+      balai25.bindTooltip("Jl. Setia Budi Barat No.7, RT.3/RW.3, Kuningan, Setia Budi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12910");
+
+      var balai26 = L.marker([-6.146381913684485, 106.82232150683414], { icon: customIcon1 });
+      balai26.bindPopup("Kantor Kelurahan Tangki");
+      balai26.addTo(map);
+      balai26.openPopup();
+      balai26.bindTooltip("VR3F+72G, Jl. Mangga Besar 12, RT.6/RW.2, Tangki, Kec. Taman Sari, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11170");
+
+      var balai27 = L.marker([-6.199726197922859, 106.86836631381088], { icon: customIcon1 });
+      balai27.bindPopup("Kantor Kelurahan Utan Kayu Selatan Jakarta Timur");
+      balai27.addTo(map);
+      balai27.openPopup();
+      balai27.bindTooltip("Jalan Galur Sari Timur, No. 1, Utan Kayu, Matraman, RT.15/RW.1, Utan Kayu Sel., Kec. Matraman, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13120");
+
+      var balai28 = L.marker([-6.203611759795023, 106.85008993751717], { icon: customIcon1 });
+      balai28.bindPopup("Kantor Lurah Pegangsaan");
+      balai28.addTo(map);
+      balai28.openPopup();
+      balai28.bindTooltip("Jl. Taman Amir Hamzah No.1 2, RT.2/RW.4, Pegangsaan, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10320");
+
+      var balai29 = L.marker([-6.19081299923666, 106.85364460683415], { icon: customIcon1 });
+      balai29.bindPopup("Kantor Kelurahan Paseban");
+      balai29.addTo(map);
+      balai29.openPopup();
+      balai29.bindTooltip("Jl. Paseban Raya No.71 2, RT.2/RW.7, Paseban, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10440");
+
+      var balai30 = L.marker([-6.190455388916511, 106.81447109888317], { icon: customIcon1 });
+      balai30.bindPopup("Kantor Lurah Kebon Kacang - Jakarta Pusat");
+      balai30.addTo(map);
+      balai30.openPopup();
+      balai30.bindTooltip("JL. K.H Mas Mansyur, No. 30, Jakarta, RT.5/RW.7, Kebon Kacang, Tanah Abang, Central Jakarta City, Jakarta 10230");
+    </script>
+  </body>
+</html>
